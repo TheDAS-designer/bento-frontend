@@ -6,13 +6,14 @@ import { useWallet } from 'use-wallet'
 import { Contract } from 'web3-eth-contract'
 
 import {
-  getMasterChefContract,
+  getBentoMinerContract,
   getWethContract,
   getFarms,
   getTotalLPWethValue,
-} from '../sushi/utils'
+} from '../bento/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
+import useBento from '../bento_hooks/useBento'
 
 export interface StakedValue {
   tokenAmount: BigNumber
@@ -25,10 +26,13 @@ export interface StakedValue {
 const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const sushi = useSushi()
-  const farms = getFarms(sushi)
-  const masterChefContract = getMasterChefContract(sushi)
-  const wethContact = getWethContract(sushi)
+  // const sushi = useSushi()
+  const bento = useBento()
+  const farms = getFarms(bento)
+  // const farms = getFarms(sushi)
+  // const masterChefContract = getMasterChefContract(sushi)
+  const bentoMinerContract = getBentoMinerContract(bento)
+  const wethContact = getWethContract(bento)
   const block = useBlock()
 
   const fetchAllStakedValue = useCallback(async () => {
@@ -44,7 +48,7 @@ const useAllStakedValue = () => {
           tokenContract: Contract
         }) =>
           getTotalLPWethValue(
-            masterChefContract,
+            bentoMinerContract,
             wethContact,
             lpContract,
             tokenContract,
@@ -54,13 +58,13 @@ const useAllStakedValue = () => {
     )
 
     setBalance(balances)
-  }, [account, masterChefContract, sushi])
+  }, [account, bentoMinerContract, bento])
 
   useEffect(() => {
-    if (account && masterChefContract && sushi) {
+    if (account && bentoMinerContract && bento) {
       fetchAllStakedValue()
     }
-  }, [account, block, masterChefContract, setBalance, sushi])
+  }, [account, block, bentoMinerContract, setBalance, bento])
 
   return balances
 }

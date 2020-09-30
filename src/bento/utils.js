@@ -119,33 +119,33 @@ export const getTotalLPWethValue = async (
     .call()
   const tokenDecimals = await tokenContract.methods.decimals().call()
   // Get the share of lpContract that bentoMinerContract owns
-  const balance = await lpContract.methods
-    .balanceOf(bentoMinerContract.options.address)
-    .call()
+  // const balance = await lpContract.methods
+  //   .balanceOf(bentoMinerContract.options.address)
+  //   .call()
   // Convert that into the portion of total lpContract = p1
-  const totalSupply = await lpContract.methods.totalSupply().call()
+  // const totalSupply = await lpContract.methods.totalSupply().call()
   // Get total weth value for the lpContract = w1
   const lpContractWeth = await wethContract.methods
     .balanceOf(lpContract.options.address)
     .call()
   // Return p1 * w1 * 2
-  const portionLp = new BigNumber(balance).div(new BigNumber(totalSupply))
+  // const portionLp = new BigNumber(balance).div(new BigNumber(totalSupply))
   const lpWethWorth = new BigNumber(lpContractWeth)
-  const totalLpWethValue = portionLp.times(lpWethWorth).times(new BigNumber(2))
+  // const totalLpWethValue = portionLp.times(lpWethWorth).times(new BigNumber(2))
   // Calculate
-  const tokenAmount = new BigNumber(tokenAmountWholeLP)
-    .times(portionLp)
-    .div(new BigNumber(10).pow(tokenDecimals))
+  // const tokenAmount = new BigNumber(tokenAmountWholeLP)
+  //   .times(portionLp)
+  //   .div(new BigNumber(10).pow(tokenDecimals))
 
-  const wethAmount = new BigNumber(lpContractWeth)
-    .times(portionLp)
-    .div(new BigNumber(10).pow(18))
+  // const wethAmount = new BigNumber(lpContractWeth)
+  //   .times(portionLp)
+  //   .div(new BigNumber(10).pow(18))
   return {
-    tokenAmount,
-    wethAmount,
-    totalWethValue: totalLpWethValue.div(new BigNumber(10).pow(18)),
-    tokenPriceInWeth: wethAmount.div(tokenAmount),
-    poolWeight: await getPoolWeight(bentoMinerContract, pid),
+    // tokenAmount,
+    // wethAmount,
+    // totalWethValue: totalLpWethValue.div(new BigNumber(10).pow(18)),
+    // tokenPriceInWeth: wethAmount.div(tokenAmount),
+    // poolWeight: await getPoolWeight(bentoMinerContract, pid),
   }
 }
 
@@ -312,15 +312,18 @@ export const getGovBalance = async (govtoken, account) => {
 
 export const getGovLockedAmount = async (bentoMiner, account) => {
   let gov_locked, gov_lockedF
-  bentoMiner.methods.lpTokensInBankOf(account).call().then((rst) => {
+  const util = require('util')
+
+  return await bentoMiner.methods.lpTokensInBankOf(account).call().then((rst) => {
     gov_locked = rst / 10 ** 18
     try {
       gov_lockedF = new BigNumber(rst)
     } catch{
       gov_lockedF = new BigNumber(0)
     }
+    console.log(`getGovLockedAmount ${gov_locked} ${gov_lockedF}`)
+    return { gov_locked, gov_lockedF }
   })
-  return { gov_locked, gov_lockedF }
 }
 
 /**
