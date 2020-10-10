@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/bento-frontend/precache-manifest.33a3545d322a617219919711c357532c.js"
+  "/bento-frontend/precache-manifest.4e47090903336b088dee646397595166.js"
 );
 
 self.addEventListener('message', (event) => {
