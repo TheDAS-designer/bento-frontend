@@ -10,6 +10,7 @@ import useBento from './useBento'
 import useBlock from './useBlock'
 
 export interface Auction {
+  proposalId: number
   auctionName: string
   proposalDescription: string
   Proposer: string
@@ -18,11 +19,12 @@ export interface Auction {
   totalVotes: BigNumber
   totalBentoInVote: BigNumber
   endAtBlockNumber: number
-  auctionForVotes: number
-  auctionAgainstVotes: number
+  auctionForVotes: BigNumber
+  auctionAgainstVotes: BigNumber
   auctionState: number
   auctionResult: boolean
   auctionOriginator: string
+  govContract: Contract
 }
 const useAuctions = () => {
   // const _isMounted = useRef(true);
@@ -69,29 +71,28 @@ const useAuctions = () => {
             let auction
             const voteInfo = await getVoteObjectInfo(govContract, votes[i].Proposalid)
             auction= {
+              proposalId: p.id,
               auctionName: `${name} ${p.id}`,
               proposalDescription: p.description,
               Proposer: p.proposer.toString(),
               proposalStartBlock: p.startBlock,
               proposalEndBlock: p.endBlock,
               totalVotes: totalVotes,
-              totalBentoInVote: voteInfo.nowBentosInVote,
+              totalBentoInVote: new BigNumber(voteInfo.nowBentosInVote),
               endAtBlockNumber: votes[i].endAtBlockNumber - _block,
-              auctionForVotes: voteInfo.trueOptionVotes? voteInfo.trueOptionVotes: 0,
-              auctionAgainstVotes: voteInfo.falseOptionVotes? voteInfo.falseOptionVotes: 0,
+              auctionForVotes: voteInfo.trueOptionVotes? new BigNumber(voteInfo.trueOptionVotes): new BigNumber(0),
+              auctionAgainstVotes: voteInfo.falseOptionVotes? new BigNumber(voteInfo.falseOptionVotes): new BigNumber(0),
               auctionState: voteInfo.stateNow,
               auctionResult: voteInfo.voteResult,
               auctionOriginator: voteInfo.originator.toString(),
+              govContract
             }
             console.log('auctionForVotes:', auction.auctionForVotes)
             console.log('auctionAgainstVotes:', auction.auctionAgainstVotes)
-            console.log('height :', `${
-              (auction.auctionForVotes
-              /(auction.auctionForVotes + auction.auctionAgainstVotes)
-              *100)
+            console.log('height :', `${(auction.auctionForVotes.div(auction.auctionForVotes.plus(auction.auctionAgainstVotes)).times(new BigNumber(100)))
+              .toNumber()
               .toLocaleString('en-US')
-              .slice(0, -1)
-              }%`)
+              .slice(0, -1)}%`)
             return auction
           }))
 
