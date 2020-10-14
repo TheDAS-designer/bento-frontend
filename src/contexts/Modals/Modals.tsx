@@ -4,7 +4,7 @@ import styled from 'styled-components'
 interface ModalsContext {
   content?: React.ReactNode,
   isOpen?: boolean,
-  onPresent: (content: React.ReactNode, key?: string) => void,
+  onPresent: (content: React.ReactNode,  key?: string, support?: boolean) => void,
   onDismiss: () => void
 }
 
@@ -17,12 +17,14 @@ const Modals: React.FC = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [content, setContent] = useState<React.ReactNode>()
   const [modalKey, setModalKey] = useState<string>()
+  const [support, setSupport] = useState(Boolean)
 
-  const handlePresent = useCallback((modalContent: React.ReactNode, key?: string) => {
+  const handlePresent = useCallback((modalContent: React.ReactNode,  key?: string ,support?: boolean) => {
     setModalKey(key)
     setContent(modalContent)
     setIsOpen(true)
-  }, [setContent, setIsOpen, setModalKey])
+    setSupport(support)
+  }, [setContent, setIsOpen, setModalKey, setSupport])
 
   const handleDismiss = useCallback(() => {
     setContent(undefined)
@@ -42,6 +44,7 @@ const Modals: React.FC = ({ children }) => {
           <StyledModalBackdrop onClick={handleDismiss} />
           {React.isValidElement(content) && React.cloneElement(content, {
             onDismiss: handleDismiss,
+            support: support
           })}
         </StyledModalWrapper>
       )}

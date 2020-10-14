@@ -1,33 +1,57 @@
 import React from 'react'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components'
-import chef from '../../assets/img/chef.png'
+import WalletProviderModal from '../../components/WalletProviderModal'
 import womenChef from '../../assets/img/womenChef.png'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
-import Balances from './components/Balances'
+import useModal from '../../bento_hooks/useModal'
 import Bento_Balances from './components/Bento_Balances'
-import { useI18n  } from 'use-i18n';
+import { useI18n } from 'use-i18n';
+import { useWallet } from 'use-wallet'
 
 const Home: React.FC = () => {
   const t = useI18n()
+  const { account } = useWallet()
+  const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
   return (
-    <Page>
-      <PageHeader
-        icon={<img src={womenChef} height={120} />}
-        title={t.title}
-        subtitle={t.subtitle}
-        content={t.content}
-      />
+    <Switch>
+      <Page>
+        {!!account ? (
+          <>
+            <PageHeader
+              icon={<img src={womenChef} height={120} />}
+              title={t.title}
+              subtitle={t.subtitle}
+              content={t.content}
+            />
 
-      <Container>
-         {/* <Balances />  */}
-        <Bento_Balances /> 
-      </Container>
+            <Container>
+              {/* <Balances />  */}
+              <Bento_Balances />
+            </Container>
+          </>
+        ) : (
+            <div
+              style={{
+                alignItems: 'center',
+                display: 'flex',
+                flex: 1,
+                justifyContent: 'center',
+              }}
+            >
+              <Button
+                onClick={onPresentWalletProviderModal}
+                text="🔓 Unlock Wallet"
+              />
+            </div>
+          )}
+      </Page>
+    </Switch>
 
-    </Page>
   )
 }
 

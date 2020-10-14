@@ -54,6 +54,8 @@ const i18n = {
         walletCancle: "Cancel",
         sellectWallet: "Select a wallet provider.",
         walletConnect: "Connect",
+
+        auction_bid: "Bid",
     },
     'zh-CN': {
         welcome: '你好',
@@ -110,6 +112,8 @@ const i18n = {
         walletCancle: "关闭",
         sellectWallet: "请选择钱包",
         walletConnect: "连接钱包",
+
+        auction_bid: "竞拍",
 
     },
 };

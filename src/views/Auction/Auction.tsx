@@ -2,16 +2,15 @@ import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 
-import chef from '../../assets/img/chef.png'
+import chef from '../../assets/img/womenChef.png'
 
 import Button from '../../components/Button'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'
 
-import useModal from '../../hooks/useModal'
+import useModal from '../../bento_hooks/useModal'
 
-import Farm from '../Farm'
 
 import Auctions from './components/Auctions'
 import { useI18n  } from 'use-i18n';

@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { tmpdir } from 'os'
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, createContext } from 'react'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 import { useWallet } from 'use-wallet'
@@ -8,102 +8,45 @@ import Button, { StyledMiniButton } from '../../../components/Button'
 import CardContent from '../../../components/CardContent'
 import Loader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
-import useAllStakedValue, {
-  StakedValue,
-} from '../../../hooks/useAllStakedValue'
-import useSushi from '../../../hooks/useSushi'
-import { getEarned, getMasterChefContract } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
-import { useI18n  } from 'use-i18n';
+import { useI18n } from 'use-i18n';
 import Card, { GreyCard, LightCard } from './Card'
-//import { Auction } from '../../../contexts/Auctions'
-import {default as useAuctions, Auction} from '../../../bento_hooks/useAuctions'
+import { default as useAuctions, Auction } from '../../../bento_hooks/useAuctions'
 import { getBalanceNumber } from '../../../utils/formatBalance'
-
-
-interface AuctionList extends Auction, StakedValue {
-  apy: BigNumber
-}
+import useVote from '../../../bento_hooks/useVoteToAuction'
+import useApprove from '../../../bento_hooks/useAuctionApprove'
+import DepositModal from './DepositModal'
+import useModal from '../../../bento_hooks/useAuctionModal'
 
 const Auctions: React.FC = () => {
 
   const { account } = useWallet()
-  const stakedValue = useAllStakedValue()
 
   const auctions = useAuctions()
-  if(auctions)console.log('auctions:', auctions)
+  if (auctions) console.log('auctions:', auctions)
 
   return (
     <Box>
-    {!!auctions.length ? auctions.map((auction, i) => ( 
-          <StyledRow key={i}> 
-              <React.Fragment>
-                <AuctionDetails auction={auction} />
-              </React.Fragment>
-          </StyledRow> 
-       )) : (
-        <StyledLoadingWrapper>
-          <Loader text="Cooking the rice ..." />
-        </StyledLoadingWrapper>
-      )} 
+      {!!auctions.length ? auctions.map((auction, i) => (
+        <StyledRow key={i}>
+          <React.Fragment>
+            <AuctionDetails auction={auction} />
+          </React.Fragment>
+        </StyledRow>
+      )) : (
+          <StyledLoadingWrapper>
+            <Loader text="Cooking the rice ..." />
+          </StyledLoadingWrapper>
+        )}
     </Box>
   )
 }
 
-interface PositionCardProps {
-  auction: Auction
-}
-
-const AuctionCard: React.FC<PositionCardProps> = ({ auction }) => {
-  const t = useI18n();
-
-  const [startTime, setStartTime] = useState(0)
-  const [harvestable, setHarvestable] = useState(0)
-
-  const { account } = useWallet()
-  // const { lpTokenAddress } = auction
-  const sushi = useSushi()
-
-  const renderer = (countdownProps: CountdownRenderProps) => {
-    const { hours, minutes, seconds } = countdownProps
-    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds
-    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes
-    const paddedHours = hours < 10 ? `0${hours}` : hours
-    return (
-      <span style={{ width: '100%' }}>
-        {paddedHours}:{paddedMinutes}:{paddedSeconds}
-      </span>
-    )
-  }
-
-  // useEffect(() => {
-  //   async function fetchEarned() {
-  //     if (sushi) return
-  //     const earned = await getEarned(
-  //       getMasterChefContract(sushi),
-  //       lpTokenAddress,
-  //       account,
-  //     )
-  //     setHarvestable(bnToDec(earned))
-  //   }
-  //   if (sushi && account) {
-  //     fetchEarned()
-  //   }
-  // }, [sushi, lpTokenAddress, account, setHarvestable])
-
-
-  return (
-     <Box>
-      {/* <AuctionDetails />
-     <AuctionDetails /> */}
-     </Box>
-  )
-}
 
 interface AuctionDetailsContent {
   auction: Auction
 }
-const AuctionDetails: React.FC<AuctionDetailsContent> = ({auction} :AuctionDetailsContent) => {
+const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDetailsContent) => {
   const t = useI18n();
   const [showMore, setShowMore] = useState(true)
   const poolActive = true
@@ -120,34 +63,66 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({auction} :AuctionDetai
   }, [showMore, arrow])
 
 
+  // useEffect(() => {
+  //   async function fetchEarned() {
+  //     if (sushi) return
+  //     const earned = await getEarned(
+  //       getMasterChefContract(sushi),
+  //       lpTokenAddress,
+  //       account,
+  //     )
+  //     setHarvestable(bnToDec(earned))
+  //   }
+  //   if (sushi && account) {
+  //     fetchEarned()
+  //   }
+  // }, [sushi, lpTokenAddress, account, setHarvestable])
+  interface Support {
+    support: boolean
+  }
+
+  const tokenBalance = new BigNumber(1);
+  const [support, setSupport] = useState(false)
+  const { onVote } = useVote(auction)
+  const { onApprove } = useApprove(auction.govContract.options.address)
+  const [onPresentDeposit] = useModal(
+    <DepositModal
+      max={tokenBalance}
+      onConfirm={onVote}
+      onApprove={onApprove}
+      tokenName={auction.auctionName}
+    />,
+  )
+  const forVotes = auction.auctionForVotes
+  const againstVotes = auction.auctionAgainstVotes
+
   return (
-
     <StyledPositionCard>
-        <AutoColumn gap="0px">
-          <FixedHeightRow>
-            <RowFixed gap="2px">
-              <MiniCardIcon>⬇️</MiniCardIcon>
-            </RowFixed>
-            <RowFixed gap="2px">
-              <StyledLink
-                target="_blank"
-                href="https://uniswap.info/pair/0xce84867c3c02b05dc570d0135103d3fb9cc19433"
-              >
+      <AutoColumn gap="0px">
+        <FixedHeightRow>
+          <RowFixed gap="2px">
+            <MiniCardIcon>⬇️</MiniCardIcon>
+          </RowFixed>
+          <RowFixed gap="2px">
+            <StyledLink
+              target="_blank"
+              href="https://uniswap.info/pair/0xce84867c3c02b05dc570d0135103d3fb9cc19433"
+            >
               {auction.auctionName}
-              </StyledLink>
-            </RowFixed>
-            <RowFixed gap="2px">
-                <StyledText>{auction.totalBentoInVote} BENTO </StyledText>
-            </RowFixed>
-            <RowFixed gap="2px">
-                <StyledText>{getBalanceNumber(auction.totalVotes)} COMP </StyledText>
-            </RowFixed>
-            <RowFixed gap="2px">
-  <StyledText>{auction.endAtBlockNumber}</StyledText>
-            </RowFixed>
+            </StyledLink>
+          </RowFixed>
+          <RowFixed gap="2px">
+            <StyledText>{getBalanceNumber(auction.totalBentoInVote)} BENTO </StyledText>
+          </RowFixed>
+          <RowFixed gap="2px">
+            <StyledText>{getBalanceNumber(auction.totalVotes)} COMP </StyledText>
+          </RowFixed>
+          <RowFixed gap="2px">
+            <StyledText>{auction.endAtBlockNumber}</StyledText>
+          </RowFixed>
 
-            <RowFixed gap="0px">
-              <StyledContent>
+          <RowFixed gap="0px">
+            <StyledContent>
               <StyledMiniButton
                 size='sm'
                 disabled={!poolActive}
@@ -155,95 +130,91 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({auction} :AuctionDetai
               >
                 {arrow}
               </StyledMiniButton>
-              </StyledContent>
-            </RowFixed>
-          </FixedHeightRow>
+            </StyledContent>
+          </RowFixed>
+        </FixedHeightRow>
       </AutoColumn>
       {showMore && (<hr />)}
       {showMore && (
-      <AutoColumn justify='flex-start'>
-        <RowFixed gap="0px">
-          <StyledText>
-          {auction.auctionName}：{auction.proposalDescription}
-          </StyledText>
-        </RowFixed>
-      </AutoColumn>
+        <AutoColumn justify='flex-start'>
+          <RowFixed gap="0px">
+            <StyledText>
+              {auction.auctionName}：{auction.proposalDescription}
+            </StyledText>
+          </RowFixed>
+        </AutoColumn>
       )}
       {showMore && (
-      <StyledCards>
-      <StyledRow>
-        <StyledCardWrapper>
-          <Card>
-            <CardContent>
-              <StyledContainer>
-                <StyledText>
-                  {t.auction_agree}
-                </StyledText>
-                <StyledBox>
-                <StyledBar height={ 
-                  
-                  auction.auctionAgainstVotes === 0 
-                  
-                  ? (auction.auctionForVotes === 0 ? '0%': '100%')
-                  
-                  : (`${(auction.auctionForVotes
-                    /(auction.auctionForVotes + auction.auctionAgainstVotes)
-                    *100)
-                    .toLocaleString('en-US')
-                    .slice(0, -1)}%`)
-                  }>
+        <StyledCards>
+          <StyledRow>
+            <StyledCardWrapper>
+              <Card>
+                <CardContent>
+                  <StyledContainer>
+                    <StyledText>
+                      {t.auction_agree}
+                    </StyledText>
+                    <StyledBox>
+                      <StyledBar height={
 
-                </StyledBar>
-                </StyledBox>
-                <StyledText>
-                    <Button
-                      size='sm'
-                      disabled={!poolActive}
-                      text={t.auction_agree}
-                    >
-                    </Button>
-                </StyledText>
-              </StyledContainer>
-            </CardContent>
-          </Card>
-        </StyledCardWrapper>
-        <StyledCardWrapper>
-          <Card>
-            <CardContent>
-              <StyledContainer>
-                <StyledText>
-                  {t.auction_disagree}
-                </StyledText>
-                <StyledBox>
-                <StyledBar height={ 
-                  
-                  auction.auctionForVotes === 0 
-                  
-                  ? (auction.auctionAgainstVotes === 0 ? '0%': '100%')
-                  
-                  : (`${(auction.auctionAgainstVotes
-                    /(auction.auctionForVotes + auction.auctionAgainstVotes)
-                    *100)
-                    .toLocaleString('en-US')
-                    .slice(0, -1)}%`)
-                  }>
+                        forVotes.isZero() ? '0%'
+                          : againstVotes.isZero() ? '100%'
+                            : (`${(forVotes.div(forVotes.plus(againstVotes)).times(new BigNumber(100)))
+                              .toNumber()
+                              .toLocaleString('en-US')
+                              .slice(0, -1)}%`)
+                      }>
 
-                </StyledBar>
-                </StyledBox>
-                <StyledText>
-                    <Button
-                      size='sm'
-                      disabled={!poolActive}
-                      text={t.auction_disagree}
-                    >
-                    </Button>
-                </StyledText>
-              </StyledContainer>
-            </CardContent>
-          </Card>
-        </StyledCardWrapper>
-      </StyledRow>
-      </StyledCards>
+                      </StyledBar>
+                    </StyledBox>
+                    <StyledText>
+                      <Button
+                        size='sm'
+                        disabled={!poolActive}
+                        text={t.auction_agree}
+                        onClick={() => { onPresentDeposit(true) }}
+                      >
+                      </Button>
+                    </StyledText>
+                  </StyledContainer>
+                </CardContent>
+              </Card>
+            </StyledCardWrapper>
+            <StyledCardWrapper>
+              <Card>
+                <CardContent>
+                  <StyledContainer>
+                    <StyledText>
+                      {t.auction_disagree}
+                    </StyledText>
+                    <StyledBox>
+                      <StyledBar height={
+
+                        againstVotes.isZero() ? '0%'
+                          : forVotes.isZero() ? '100%'
+                            : (`${(againstVotes.div(forVotes.plus(againstVotes)).times(new BigNumber(100)))
+                              .toNumber()
+                              .toLocaleString('en-US')
+                              .slice(0, -1)}%`)
+                      }>
+
+                      </StyledBar>
+                    </StyledBox>
+                    <StyledText>
+                      <Button
+                        size='sm'
+                        disabled={!poolActive}
+                        text={t.auction_disagree}
+                        onClick={() => { onPresentDeposit(false) }}
+                      >
+                      </Button>
+                    </StyledText>
+                  </StyledContainer>
+                </CardContent>
+              </Card>
+            </StyledCardWrapper>
+          </StyledRow>
+        </StyledCards>
       )}
     </StyledPositionCard>
   )
@@ -267,7 +238,7 @@ const AutoColumn = styled.div<{
   justify-items: ${({ justify }) => justify && justify};
 `
 
-const Row = styled(Box)<{ align?: string; padding?: string; border?: string; borderRadius?: string }>`
+const Row = styled(Box) <{ align?: string; padding?: string; border?: string; borderRadius?: string }>`
   width: 100%;
   display: flex;
   padding: 0;
@@ -290,7 +261,7 @@ const RowFlat = styled.div`
   align-items: flex-end;
 `
 
-export const AutoRow = styled(Row)<{ gap?: string; justify?: string }>`
+export const AutoRow = styled(Row) <{ gap?: string; justify?: string }>`
   flex-wrap: wrap;
   margin: ${({ gap }) => gap && `-${gap}`};
   justify-content: ${({ justify }) => justify && justify};
@@ -300,7 +271,7 @@ export const AutoRow = styled(Row)<{ gap?: string; justify?: string }>`
   }
 `
 
-const RowFixed = styled(Row)<{ gap?: string; justify?: string }>`
+const RowFixed = styled(Row) <{ gap?: string; justify?: string }>`
   width: fit-content;
   margin: ${({ gap }) => gap && `-${gap}`};
 `

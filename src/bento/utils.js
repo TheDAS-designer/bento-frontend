@@ -389,24 +389,25 @@ export const withdrawBento = async (bentoken, bentoMiner, account, v_Bentos_with
   })
 }
 
-/**
- * 
- * @param {*} govtoken 
- * @param {*} account 
- * @param {*} amount 
- */
-
-// export const approveGovToken = async (tokenContract, govAddress, account, amount) => {
-//   await tokenContract.methods.approve(govAddress, ethers.constants.MaxUint256).send({ from: account }).then((rst) => {
-//     console.log('Approved receipt:', rst);
-//   })
+export const approveBento = async (bentoContract, govAddress, account, amount) => {
+  return bentoContract.methods
+    .approve(govAddress, new BigNumber(amount).times(new BigNumber(10).pow(18)))
+    .send({ from: account })
+    .then((rst) => {
+      console.log('Approved receipt:', rst);
+      return true
+    })
+    .catch((e) => {
+      console.log(`failed to approve ${e} amount ${amount} bento ${govAddress} account ${account}`)
+      return false
+    })
+}
 export const approveGovToken = async (tokenContract, govAddress, account, amount) => {
   return tokenContract.methods
     .approve(govAddress, new BigNumber(amount).times(new BigNumber(10).pow(18)))
     .send({ from: account })
     .then((rst) => {
       console.log('Approved receipt:', rst);
-
       return true
     })
     .catch((e) => {
@@ -457,9 +458,6 @@ export const getBentoPriceInWeth = async (
   return await getGovPriceInWeth(bento, lpContract, wethContract)
 }
 
-// export const getUnionWeight = async(bento, govToken) => {
-//    return await bento.contracts.bento.methods.getUnionWeight(govToken.options.address).call()
-// }
 
 export const getApyByPool = async (
   tokenContract,
@@ -531,64 +529,6 @@ export const totalGovTokensLocked = async (bentoMiner) => {
   }
 }
 
-
-// export const depositGovTokenToMine= async() => {
-//   // web3.toWei(this.v_Naps, "ether")
-//   if (this.v_Govs_deposit < 10) {
-//       alert('Amount at least than 10.');
-//       return;
-//   }
-//   BentoMiner.methods.deposit(web3.toWei(this.v_Govs_deposit, "ether")).send({ from: web3.eth.defaultAccount }).then((rst) => {
-//       console.log('Deposit Gov receipt:', rst);
-//       this.refreshAll();
-//       this.delyRefresh();
-//       try {
-//         gov_lockedF = new BigNumber(rst)
-//       } catch{
-//         gov_lockedF = new BigNumber(0)
-//       }
-//     })
-//     return {gov_locked, gov_lockedF}
-// }
-/**
- * 食堂 - 取回治理代币按钮
- * 
- * web3.toWei(this.v_Govs_withdraw, "ether")
- * 
- */
-export const withdrawGovToken = async (bentoMiner) => {
-  // bentoMiner.methods.withdraw(web3.toWei(this.v_Govs_withdraw, "ether")).send({ from: web3.eth.defaultAccount }).then((rst) => {
-  //     console.log('Withdraw Gov receipt:', rst);
-  //     this.refreshAll();
-  //     this.delyRefresh();
-  //     try {
-  //       gov_lockedF = new BigNumber(rst)
-  //     } catch{
-  //       gov_lockedF = new BigNumber(0)
-  //     }
-  //   })
-  //   return {gov_locked, gov_lockedF}
-}
-
-/**
- * 未添加方法:
- * 获得对某提案投票的便当总数
- * 参数 id
- *
- * function getVoteObjectInfo(uint256 _proposalid)
-        external
-        view
-        returns (
-            address originator,
-            bool voteResult,
-            uint32 endAtBlockNumber,
-            uint112 nowBentosInVote, //总数
-            uint256 trueOptionVotes,
-            uint256 falseOptionVotes,
-            voteState stateNow
-        )
-
- */
 export const getVoteObjectInfo = async (govContract, pid) => {
   let vote = await govContract.methods.getVoteObjectInfo(pid).call()
   return vote
@@ -626,9 +566,9 @@ export const getCastingVoteByContract = async (govContract, block) => {
 }
 
 //test castvote
-export const govCastVote = async (bentoMiner, id, account) => {
+export const govCastVote = async (govContract, id, support, account) => {
   //get bentoMiner
-  return await bentoMiner.methods.castVote(id, true).send({ from: account })
+  return await govContract.methods.castVote(id, support).send({ from: account })
 }
 
 //test launchvote
@@ -654,7 +594,7 @@ export const depositBento2Miner = async (bento, amount, account) => {
  * @param {*} govContract 
  * @param {*} block 
  */
-export const getVoteCreatedEvent = async(govContract, block) => {
+export const getVoteCreatedEvent = async (govContract, block) => {
   const votesCreatedStream = await govContract.getPastEvents('voteCreated', { fromBlock: 0, toBlock: 'latest' })
   let votesCreated = votesCreatedStream.filter(
     (event) => event.returnValues && event.returnValues.endAtBlockNumber > block
@@ -666,30 +606,6 @@ export const getVoteCreatedEvent = async(govContract, block) => {
   return votesCreated
 }
 
-// export const getProposalByGov = async (gov, block) => {
-//   // 1. get voteCreate Events
-//   const govContract = gov.govContract
-//   const votesCreatedStream = await govContract.getPastEvents('voteCreated', { fromBlock: 0, toBlock: 'latest' })
-//   let votesCreated = votesCreatedStream.filter(
-//     (event) => event.returnValues && event.returnValues.endAtBlockNumber > block
-//   ).map(
-//     (event) => {
-//       return event.returnValues
-//     }
-//   )
-//   // 2. get govToken proposal
-//   let proposals = getProposals(gov, block)
-//   proposals = proposals.filter( p => {
-//     let flag = false
-//     for(let i in votesCreated){
-//       if(votesCreated[i].id === p.id){
-//           flag = true
-//           break
-//       }
-//     }
-//     return flag
-//   })
-// }
 /**
  * get proposals event by gov
  * @param {*} gov 
@@ -726,4 +642,18 @@ const _getCompoundProposal = async (compGovContract, block) => {
   //   })
   // )
   return result
+
+}
+
+export const voteOption = async (govContract, pid, support, amount, account) => {
+  const tx = await govContract.methods.voteOption(
+    pid,
+    support,
+    new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
+  return tx
 }
