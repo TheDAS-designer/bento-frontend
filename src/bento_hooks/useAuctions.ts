@@ -47,13 +47,9 @@ const useAuctions = () => {
         }) => {
           //@ts-ignore
           const _block = await bento.web3.eth.getBlockNumber()
-          console.log('_block:', _block)
           const votes = await getVoteCreatedEvent(govContract, _block)
-          console.log('votes:', votes)
           const totalVotes = await totalGovTokensLocked(govContract)
-          console.log('totalVotes:', totalVotes)
           let proposals = await getProposalsEvent(originalGovContract, name, _block)
-          console.log('proposals:', proposals)
           proposals = proposals.filter( p => {
             let flag = false
             for(let i in votes){
@@ -65,7 +61,6 @@ const useAuctions = () => {
             return flag
           })
 
-          console.log('proposals:', proposals)
           
           const _auctions = Promise.all(proposals.map( async(p, i) => {
             let auction
@@ -87,12 +82,12 @@ const useAuctions = () => {
               auctionOriginator: voteInfo.originator.toString(),
               govContract
             }
-            console.log('auctionForVotes:', auction.auctionForVotes)
-            console.log('auctionAgainstVotes:', auction.auctionAgainstVotes)
-            console.log('height :', `${(auction.auctionForVotes.div(auction.auctionForVotes.plus(auction.auctionAgainstVotes)).times(new BigNumber(100)))
-              .toNumber()
-              .toLocaleString('en-US')
-              .slice(0, -1)}%`)
+            // console.log('auctionForVotes:', auction.auctionForVotes)
+            // console.log('auctionAgainstVotes:', auction.auctionAgainstVotes)
+            // console.log('height :', `${(auction.auctionForVotes.div(auction.auctionForVotes.plus(auction.auctionAgainstVotes)).times(new BigNumber(100)))
+            //   .toNumber()
+            //   .toLocaleString('en-US')
+            //   .slice(0, -1)}%`)
             return auction
           }))
 
@@ -107,7 +102,7 @@ const useAuctions = () => {
 
   useEffect(() => {
     if (bento) {
-      console.log('bento:', bento)
+      console.log('fdasfdsafdsafdsafdsafdsa')
       fetchAuctions()
     }
     // return () => {

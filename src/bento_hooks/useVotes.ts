@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
-import { provider } from 'web3-core'
 import { Contract } from 'web3-eth-contract'
 
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
-import {  getGovTotalSupply, getGovs, getCastingVoteByContract } from '../bento/utils'
+import { getGovs, getLaunchedVoteByGovContract } from '../bento/utils'
 import useBento from './useBento'
 import useBlock from './useBlock'
 
@@ -47,7 +46,8 @@ const useVotes = () => {
         }) => {
           if(pid === 0) return
           // @ts-ignore
-          let vote = await getCastingVoteByContract(govContract, await bento.web3.eth.getBlockNumber())
+          const _block = await bento.web3.eth.getBlockNumber()
+          let vote = await getLaunchedVoteByGovContract(govContract, _block)
 
           vote.map( (_vote) => {
             votes.push({
@@ -61,13 +61,13 @@ const useVotes = () => {
     //console.log('votes:', votes)
     votes = votes.sort((vote1, vote2) => vote2.nowBentosInVote.toNumber() - vote1.nowBentosInVote.toNumber())
     setVotes(votes)
-  }, [account, bento])
+  }, [account, bento, setVotes, govs])
 
   useEffect(() => {
     if (bento && account) {
       fetchVotes()
     }
-  }, [account, block, setVotes, bento, govs])
+  }, [account, block, bento])
 
   return votes
 }

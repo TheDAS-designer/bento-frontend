@@ -5,7 +5,7 @@ import { Contract } from 'web3-eth-contract'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
-import { getBentoMinerContract, getGovTotalSupply, getGovs } from '../bento/utils'
+import {  getGovTotalSupply, getGovs } from '../bento/utils'
 import useBento from './useBento'
 import useBlock from './useBlock'
 
@@ -17,18 +17,17 @@ export interface GovValue {
 }
 const useAllGovTokenStake = () => {
   const iconSize = [85, 75, 65, 55, 47]
-  const _isMounted = useRef(true);
+  // const _isMounted = useRef(true);
   const [govValues, setGovValues] = useState([] as Array<GovValue>)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const bento = useBento()
-  const bentoMinerContract = getBentoMinerContract(bento)
   const block = useBlock()
   const govs = getGovs(bento)
 
   const fetchAllGovTotalSupply = useCallback(async () => {
-    if(!_isMounted.current) return
+    // if(!_isMounted.current) return
     let govValues: Array<GovValue> = await Promise.all(
-      govs.map(
+      govs.filter( g => g.pid !== 0 ).map(
         async ({
           govContract,
           name,
@@ -54,16 +53,16 @@ const useAllGovTokenStake = () => {
       }
     })
     setGovValues(govValues)
-  }, [account, bentoMinerContract, bento])
+  }, [govs, bento, setGovValues])
 
   useEffect(() => {
-    if (bentoMinerContract) {
+    if (bento) {
       fetchAllGovTotalSupply()
     }
-    return () => {
-      _isMounted.current = false
-    }
-  }, [account, block, bentoMinerContract, bento])
+    // return () => {
+    //   _isMounted.current = false
+    // }
+  }, [account, block, bento])
 
   return govValues
 }
