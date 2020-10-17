@@ -22,6 +22,7 @@ const useBentoBalance = () => {
 
   useEffect(() => {
     if (account && bentoMinerContract && bento) {
+      
       fetchBalance()
     }
   }, [account, block, bentoMinerContract, setBalance, bento])

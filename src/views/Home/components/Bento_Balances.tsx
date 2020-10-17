@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js'
 import React, { useEffect, useState, useCallback } from 'react'
 import CountUp from 'react-countup'
+import { NavLink } from 'react-router-dom'
 import styled, { AnyStyledComponent } from 'styled-components'
 import { useWallet } from 'use-wallet'
 import Card from '../../../components/Card'
@@ -25,8 +26,7 @@ import { getBentoAddress, getBentoSupply } from '../../../bento/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useI18n } from 'use-i18n'
 import Button from '../../../components/Button'
-import Logo from '../../../components/Logo'
-import { govCastVote, getBentoMinerContract, getCastingVoteByContract, govLaunchVote, depositBento2Miner } from '../../../bento/utils'
+import {  getBentoMinerContract, } from '../../../bento/utils'
 const PendingRewards: React.FC = () => {
   const t = useI18n()
   const [start, setStart] = useState(0)
@@ -238,7 +238,7 @@ const Balances: React.FC = () => {
                 </React.Fragment>
               ))}
 
-              <StyledAuctionEntry>
+              {/* <StyledAuctionEntry>
                 <StyledAuctionEntryName>
                   <Label text="vote id" />
                 </StyledAuctionEntryName>
@@ -252,11 +252,14 @@ const Balances: React.FC = () => {
                     govLaunchVote(bento, val, account)
                   }} text="launch vote"/>
                 </StyledAuctionEntryContent>
-              </StyledAuctionEntry>
+              </StyledAuctionEntry> */}
             </StyledAuctionEntrys>
           </CardContent>
           <Footnote>
-            <Button text={`${t.buy}`} href="https://app.uniswap.org/#/swap" variant="default" size="md" />
+
+          <StyleLink exact to="/auction">
+            <Button text={`${t.auction_bid}`} variant="default" size="md" />
+            </StyleLink>
           </Footnote>
         </Card>
       </StyledWrapper>
@@ -264,6 +267,9 @@ const Balances: React.FC = () => {
   )
 }
 
+const StyleLink = styled(NavLink)`
+text-decoration: none;
+`
 
 interface IFarm {
   name: string

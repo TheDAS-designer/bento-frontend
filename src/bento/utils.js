@@ -534,7 +534,7 @@ export const getVoteObjectInfo = async (govContract, pid) => {
   return vote
 }
 
-export const getCastingVoteByContract = async (govContract, block) => {
+export const getLaunchedVoteByGovContract = async (govContract, block) => {
 
   // get voteCreate Events
   const votesCreatedStream = await govContract.getPastEvents('voteCreated', { fromBlock: 0, toBlock: 'latest' })
