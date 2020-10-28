@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 import { useWallet } from 'use-wallet'
-import Button from '../../../components/Button'
+import {default as Button, CyberButton} from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import SidedCardIcon from '../../../components/CardIcon'
@@ -115,7 +115,7 @@ const BentoCard: React.FC<FarmCardProps> = ({ farm }) => {
                 </span>
               </StyledText>
               <StyledContent>
-                <Button
+                <CyberButton
                   size='sm'
                   disabled={!poolActive}
                   text={t.farm_uniswap}
@@ -127,8 +127,8 @@ const BentoCard: React.FC<FarmCardProps> = ({ farm }) => {
                       renderer={renderer}
                     />
                   )}
-                </Button>
-                <Button
+                </CyberButton>
+                <CyberButton
                   size='sm'
                   disabled={!poolActive}
                   text={t.farm_balancer}
@@ -140,13 +140,13 @@ const BentoCard: React.FC<FarmCardProps> = ({ farm }) => {
                       renderer={renderer}
                     />
                   )}
-                </Button>
+                </CyberButton>
               </StyledContent>
             </StyledContainer>
             <StyledContainer>
               <StyledText>
                 <span>
-                    <Button
+                    <CyberButton
                         size='sm'
                         disabled={!poolActive}
                         text={t.unclaimed + 'BENTO 456'}
@@ -158,7 +158,7 @@ const BentoCard: React.FC<FarmCardProps> = ({ farm }) => {
                             renderer={renderer}
                           />
                         )}
-                      </Button>
+                      </CyberButton>
                 </span>
               </StyledText>
             </StyledContainer>

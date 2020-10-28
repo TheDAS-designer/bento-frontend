@@ -49,6 +49,7 @@ const useAuctions = () => {
           const _block = await bento.web3.eth.getBlockNumber()
           const votes = await getVoteCreatedEvent(govContract, _block)
           const totalVotes = await totalGovTokensLocked(govContract)
+         //mydebug
           let proposals = await getProposalsEvent(originalGovContract, name, _block)
           proposals = proposals.filter( p => {
             let flag = false

@@ -4,7 +4,7 @@ import React, { useEffect, useState, useCallback, createContext } from 'react'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 import { useWallet } from 'use-wallet'
-import Button, { StyledMiniButton } from '../../../components/Button'
+import {default as Button, CyberButton, StyledMiniButton}  from '../../../components/Button'
 import CardContent from '../../../components/CardContent'
 import Loader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
@@ -17,6 +17,7 @@ import useVote from '../../../bento_hooks/useVoteToAuction'
 import useApprove from '../../../bento_hooks/useAuctionApprove'
 import DepositModal from './DepositModal'
 import useModal from '../../../bento_hooks/useAuctionModal'
+import useBentoBalance from '../../../bento_hooks/useBentoBalance'
 
 const Auctions: React.FC = () => {
 
@@ -30,6 +31,7 @@ const Auctions: React.FC = () => {
       {!!auctions.length ? auctions.map((auction, i) => (
         <StyledRow key={i}>
           <React.Fragment>
+          <Spacer size='md'></Spacer>
             <AuctionDetails auction={auction} />
           </React.Fragment>
         </StyledRow>
@@ -81,7 +83,7 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
     support: boolean
   }
 
-  const tokenBalance = new BigNumber(1);
+  const tokenBalance = useBentoBalance();
   const [support, setSupport] = useState(false)
   const { onVote } = useVote(auction)
   const { onApprove } = useApprove(auction.govContract.options.address)
@@ -97,11 +99,12 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
   const againstVotes = auction.auctionAgainstVotes
 
   return (
+    
     <StyledPositionCard>
+      <Spacer size='sm'></Spacer>
       <AutoColumn gap="0px">
         <FixedHeightRow>
           <RowFixed gap="2px">
-            <MiniCardIcon>⬇️</MiniCardIcon>
           </RowFixed>
           <RowFixed gap="2px">
             <StyledLink
@@ -115,12 +118,12 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
             <StyledText>{getBalanceNumber(auction.totalBentoInVote)} BENTO </StyledText>
           </RowFixed>
           <RowFixed gap="2px">
-            <StyledText>{getBalanceNumber(auction.totalVotes)} COMP </StyledText>
+            <StyledText>{getBalanceNumber(auction.totalVotes) < 1 ? 0 : getBalanceNumber(auction.totalVotes)} COMP </StyledText>
           </RowFixed>
           <RowFixed gap="2px">
-            <StyledText>{auction.endAtBlockNumber}</StyledText>
+            <StyledText>{auction.endAtBlockNumber} BLOCKS</StyledText>
           </RowFixed>
-
+      
           <RowFixed gap="0px">
             <StyledContent>
               <StyledMiniButton
@@ -168,13 +171,14 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
                       </StyledBar>
                     </StyledBox>
                     <StyledText>
-                      <Button
-                        size='sm'
+                      <CyberButton
+                        size='md'
+                        buttonWidth={250}
                         disabled={!poolActive}
                         text={t.auction_agree}
                         onClick={() => { onPresentDeposit(true) }}
                       >
-                      </Button>
+                      </CyberButton>
                     </StyledText>
                   </StyledContainer>
                 </CardContent>
@@ -201,13 +205,14 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
                       </StyledBar>
                     </StyledBox>
                     <StyledText>
-                      <Button
+                      <CyberButton
                         size='sm'
+                        buttonWidth={250}
                         disabled={!poolActive}
                         text={t.auction_disagree}
                         onClick={() => { onPresentDeposit(false) }}
                       >
-                      </Button>
+                      </CyberButton>
                     </StyledText>
                   </StyledContainer>
                 </CardContent>
@@ -224,7 +229,7 @@ const Box = styled.div({})
 
 const StyledPositionCard = styled.div`
   width: 900px;
-  border: 1px solid #e6dcd5;
+  border: 2px solid #00f0ff;
   position: relative;
 `
 

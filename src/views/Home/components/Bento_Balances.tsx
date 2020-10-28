@@ -25,8 +25,10 @@ import useBento from '../../../bento_hooks/useBento'
 import { getBentoAddress, getBentoSupply } from '../../../bento/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useI18n } from 'use-i18n'
-import Button from '../../../components/Button'
-import {  getBentoMinerContract, } from '../../../bento/utils'
+import {default as Button, CyberButton} from '../../../components/Button'
+import { getBentoMinerContract, } from '../../../bento/utils'
+import '../../../CyberCSS.css'
+//#714cc3
 const PendingRewards: React.FC = () => {
   const t = useI18n()
   const [start, setStart] = useState(0)
@@ -90,7 +92,7 @@ const Balances: React.FC = () => {
     },
     [setVal],
   )
-
+//- 3 -3 16
 
   return (
     <>
@@ -107,7 +109,7 @@ const Balances: React.FC = () => {
                 />
               </div>
               <ButtonStyle>
-                <Button text={`${t.mining}`} to="/farms" variant="default" size="md" />
+                <CyberButton text={`${t.mining}`} to="/farms" variant="default" size="md" />
               </ButtonStyle>
             </StyledBalances>
           </CardContent>
@@ -130,7 +132,7 @@ const Balances: React.FC = () => {
                 />
               </div>
               <ButtonStyle>
-                <Button text={`${t.buy}`} href="https://app.uniswap.org/#/swap" variant="default" size="md" />
+                <CyberButton text={`${t.buy}`} href="https://app.uniswap.org/#/swap" variant="default" size="md" />
               </ButtonStyle>
             </StyledBalances>
           </CardContent>
@@ -164,9 +166,10 @@ const Balances: React.FC = () => {
                 </React.Fragment>
               ))}
 
+              {/* size={farm.size} */}
+
               <StyledPool>
                 <StyledFlex>
-                  <BentoIcon size={75} meme={'🍤'} />
                   <StyledSubtitle>COMP</StyledSubtitle>
                 </StyledFlex>
                 <StyledSubtitle>
@@ -176,7 +179,6 @@ const Balances: React.FC = () => {
 
               <StyledPool>
                 <StyledFlex>
-                  <BentoIcon size={61} meme={'🥩'} />
                   <StyledSubtitle>UNI</StyledSubtitle>
                 </StyledFlex>
                 <StyledSubtitle>
@@ -186,7 +188,6 @@ const Balances: React.FC = () => {
 
               <StyledPool>
                 <StyledFlex>
-                  <BentoIcon size={52} meme={'🍙'} />
                   <StyledSubtitle>AAVE</StyledSubtitle>
                 </StyledFlex>
                 <StyledSubtitle>
@@ -196,7 +197,6 @@ const Balances: React.FC = () => {
 
               <StyledPool>
                 <StyledFlex>
-                  <BentoIcon meme={'🍔'} />
                   <StyledSubtitle>MKR</StyledSubtitle>
                 </StyledFlex>
                 <StyledSubtitle>
@@ -208,7 +208,7 @@ const Balances: React.FC = () => {
             </StyledPools>
           </CardContent>
           <Footnote>
-            <Button text={`${t.stake}`} href="https://app.uniswap.org/#/swap" variant="default" size="md" />
+            <CyberButton text={`${t.stake}`} href="https://app.uniswap.org/#/swap" variant="default" size="md" />
 
           </Footnote>
         </Card>
@@ -232,7 +232,8 @@ const Balances: React.FC = () => {
               </StyledSubtitle>
               <Spacer size="sm"></Spacer>
 
-              {votes.map((vote, j) => (
+              {votes.filter((vote, i) => i < 5).map((vote, j) => (
+               
                 <React.Fragment key={j}>
                   <Vote vote={vote} />
                 </React.Fragment>
@@ -248,7 +249,7 @@ const Balances: React.FC = () => {
                 </StyledAuctionEntryContent>
                 <Spacer size="sm"></Spacer>
                 <StyledAuctionEntryContent>
-                  <Button onClick={() => {
+                  <CyberButton onClick={() => {
                     govLaunchVote(bento, val, account)
                   }} text="launch vote"/>
                 </StyledAuctionEntryContent>
@@ -257,8 +258,10 @@ const Balances: React.FC = () => {
           </CardContent>
           <Footnote>
 
-          <StyleLink exact to="/auction">
-            <Button text={`${t.auction_bid}`} variant="default" size="md" />
+            <StyleLink exact to="/auction">
+              <div style={{width: '100%'}}>
+              <CyberButton text={`${t.auction_bid}`} variant="default" />
+              </div>
             </StyleLink>
           </Footnote>
         </Card>
@@ -306,7 +309,7 @@ const Pool: React.FC<IFarm> = ({ name, icon, size, govTotalStake }) => {
   return (
     <StyledPool>
       <StyledFlex>
-        <BentoIcon meme={icon} size={size} />
+        {/* <BentoIcon meme={icon} size={size} /> */}
         <StyledSubtitle>{name}</StyledSubtitle>
       </StyledFlex>
       <StyledSubtitle>
@@ -329,7 +332,9 @@ margin-top: 10px;
 
 const StyledAuctionEntry = styled.div`
 display: flow;
+margin:0px;
   border: 1px solid #e6dcd5;
+  line-height: 13px;
   border-radius: 8px;
   background: #ffffff;
   padding: 0px 1px 0px 8px;
@@ -348,7 +353,7 @@ const StyledPool = styled.div`
   color: #aa9584;
   width: 100%;
   margin-top: 13px;
-  line-height: 32px;
+  line-height: 45px;
   font-size: 13px;
   border: 1px solid #e6dcd5;
   text-align: center;

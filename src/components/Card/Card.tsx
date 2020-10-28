@@ -6,7 +6,7 @@ const Card: React.FC = ({ children }) => <StyledCard>{children}</StyledCard>
 const StyledCard = styled.div`
   background: ${(props) => props.theme.color.grey[200]};
   border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
-  border-radius: 12px;
+  border-radius: 16px 0px 16px 0px;
   box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
   display: flex;
   flex: 1;

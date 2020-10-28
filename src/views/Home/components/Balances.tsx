@@ -109,7 +109,7 @@ const Balances: React.FC = () => {
                 />
               </div>
               <div style={{ width: 150. }}>
-                <Button text={`🍱${t.mining}`} to="/farms" variant="default" size="md" />
+                <Button text={`🦾${t.mining}`} to="/farms" variant="default" size="md" />
               </div>
             </StyledBalances>
           </CardContent>
@@ -132,7 +132,7 @@ const Balances: React.FC = () => {
                 />
               </div>
               <div style={{ width: 150. }}>
-                <Button text={`${t.buy}🍱`} href="https://app.uniswap.org/#/swap" variant="default" size="md" />
+                <Button text={`${t.buy}🦾`} href="https://app.uniswap.org/#/swap" variant="default" size="md" />
               </div>
             </StyledBalances>
           </CardContent>
@@ -161,7 +161,7 @@ const Balances: React.FC = () => {
             <StyledPools>
               <StyledPool>
                 <StyledFlex>
-                  <SushiIcon size={75} meme={'🍤'} />
+                  <SushiIcon meme={'🍤'} />
                   <StyledSubtitle>COMP</StyledSubtitle>
                 </StyledFlex>
                 <StyledSubtitle>
@@ -171,7 +171,7 @@ const Balances: React.FC = () => {
 
               <StyledPool>
                 <StyledFlex>
-                  <SushiIcon size={61} meme={'🥩'} />
+                  <SushiIcon  meme={'🥩'} />
                   <StyledSubtitle>UNI</StyledSubtitle>
                 </StyledFlex>
                 <StyledSubtitle>
@@ -181,7 +181,7 @@ const Balances: React.FC = () => {
 
               <StyledPool>
                 <StyledFlex>
-                  <SushiIcon size={52} meme={'🍙'} />
+                  <SushiIcon meme={'🍙'} />
                   <StyledSubtitle>AAVE</StyledSubtitle>
                 </StyledFlex>
                 <StyledSubtitle>

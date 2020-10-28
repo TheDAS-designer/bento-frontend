@@ -16,7 +16,7 @@ const SushiIcon: React.FC<SushiIconProps> = ({ size = 36, v1, v2, v3, meme }) =>
       filter: v1 ? 'saturate(0.5)' : undefined,
     }}
   >
-    {!!meme? meme: '🍱'}
+    {!!meme? meme: '🦾'}
   </span>
 )
 

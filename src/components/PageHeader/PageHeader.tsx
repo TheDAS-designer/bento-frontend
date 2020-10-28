@@ -42,16 +42,17 @@ const StyledIcon = styled.div`
 `
 
 const StyledTitle = styled.h1`
-  font-family: 'Kaushan Script', sans-serif;
-  color: ${(props) => props.theme.color.grey[600]};
-  font-size: 36px;
+  font-family: Tomorrow, sans-serif;
+  color: #e6dcd5;
+  font-size: 34px;
   font-weight: 700;
   margin: 0;
   padding: 0;
 `
 
 const StyledSubtitle = styled.h3`
-  color: ${(props) => props.theme.color.grey[400]};
+font-family: Tomorrow, sans-serif;
+  color: #e6dcd5;
   font-size: 18px;
   font-weight: 400;
   margin: 0;
