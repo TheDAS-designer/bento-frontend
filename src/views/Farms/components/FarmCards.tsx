@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 import { useWallet } from 'use-wallet'
-import Button from '../../../components/Button'
+import {default as Button, CyberButton } from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import SidedCardIcon from '../../../components/CardIcon'
@@ -106,7 +106,7 @@ const FarmCards: React.FC = () => {
               </React.Fragment>
             ))}
 
-            <BentoCard farm={rows[0][0]} />
+            {/* <BentoCard farm={rows[0][0]} /> */}
             <StyledSpacer />
           </StyledRow>
         // ))
@@ -205,7 +205,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               <span style={{ textAlign: 'center' }}><StyledTitle>{farm.name}</StyledTitle></span>
             </StyledText>
             <StyledDetails>
-              <StyledDetail>{t.buy} {farm.govToken.toUpperCase()} {t.earn_profit} {farm.earnToken.toUpperCase()}</StyledDetail>
+              <StyledDetail>{t.buy} {farm.govToken.toUpperCase()} {t.earn_profit} UIN</StyledDetail>
             </StyledDetails>
           </StyledContent>
           <StyledContainer>
@@ -223,8 +223,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             </StyledText>
             <StyledText>
               <span>
-                <Button
-                  size='sm'
+                <CyberButton
+                  size='lg'
+                  buttonWidth={100}
                   disabled={!poolActive}
                   text={t.mining}
                   onClick={onPresentDeposit}
@@ -235,11 +236,12 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                       renderer={renderer}
                     />
                   )}
-                </Button>
+                </CyberButton>
               </span>
               <span style={{ textAlign: 'right' }}>
-                <Button
-                  size='sm'
+                <CyberButton
+                  size='lg'
+                  buttonWidth={100}
                   disabled={pendingTx}
                   text={t.redeem}
                   onClick={onPresentWithdraw}
@@ -250,7 +252,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                       renderer={renderer}
                     />
                   )}
-                </Button>
+                </CyberButton>
               </span>
             </StyledText>
           </StyledContainer>
@@ -258,8 +260,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
           <StyledContainer>
               <StyledText>
                 <span>
-                    <Button
-                        size='sm'
+                    <CyberButton
+                        size='lg'
+                        buttonWidth={220}
                         disabled={pendingTx}
                         text={t.unclaimed + 'BENTO\n' + getBalanceNumber(pendingRewrds)} 
                         onClick={async () => {
@@ -268,7 +271,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                           setPendingTx(false)
                         }}
                       >
-                      </Button>
+                      </CyberButton>
                 </span>
               </StyledText>
           </StyledContainer>
@@ -286,7 +289,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             </StyledInsight>
         </CardContent>
       </StyledBadge>
-      </Card>
+      </Card> 
     </StyledCardWrapper>
   )
 }

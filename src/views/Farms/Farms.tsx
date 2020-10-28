@@ -3,8 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 
 import womenChef from '../../assets/img/womenChef.png'
-
-import Button from '../../components/Button'
+import {default as Button, CyberButton} from '../../components/Button'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'

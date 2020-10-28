@@ -10,9 +10,9 @@ interface LoaderProps {
 const Loader: React.FC<LoaderProps> = ({ text }) => {
   return (
     <StyledLoader>
-      <CardIcon>
-        <StyledSushi>🍣</StyledSushi>
-      </CardIcon>
+
+      <StyledSushi>🦾</StyledSushi>
+
       {!!text && <StyledText>{text}</StyledText>}
     </StyledLoader>
   )

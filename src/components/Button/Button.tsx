@@ -134,7 +134,7 @@ export const StyledMiniButton: React.FC<ButtonProps> = ({
       buttonPadding = spacing[4]
       buttonSize = 56
       fontSize = 16
-  }
+  } 
 
   const ButtonChild = useMemo(() => {
     if (to) {
@@ -147,7 +147,7 @@ export const StyledMiniButton: React.FC<ButtonProps> = ({
   }, [href, text, to])
 
   return (
-    <StyledButton
+    <StyledButtonMini
       boxShadow={boxShadow}
       color={buttonColor}
       disabled={disabled}
@@ -158,7 +158,7 @@ export const StyledMiniButton: React.FC<ButtonProps> = ({
     >
       {children}
       {ButtonChild}
-    </StyledButton>
+    </StyledButtonMini>
   )
 }
 
@@ -172,6 +172,21 @@ interface StyledButtonProps {
   padding: number,
   size: number
 }
+
+const StyledButtonMini = styled.button<StyledButtonProps>`
+align-items: center;
+border: 0;
+
+cursor: pointer;
+display: flex;
+height: ${props => props.size}px;
+justify-content: center;
+pointer-events: ${props => !props.disabled ? undefined : 'none'};
+width: 100%;
+&:hover {
+  background-color: ${props => props.theme.color.grey[100]};
+}
+`
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;

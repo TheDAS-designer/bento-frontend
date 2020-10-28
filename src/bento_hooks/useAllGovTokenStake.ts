@@ -46,12 +46,12 @@ const useAllGovTokenStake = () => {
       ),
     )
     govValues.sort((gov1, gov2) => gov2.govTotalStake.toNumber() - gov1.govTotalStake.toNumber())
-    govValues = govValues.map((gov, index) => {
-      return {
-        ...gov,
-        size: index < 5 ? iconSize[index] : 36
-      }
-    })
+    // govValues = govValues.map((gov, index) => {
+    //   return {
+    //     ...gov,
+    //     size: index < 5 ? iconSize[index] : 36
+    //   }
+    // })
     setGovValues(govValues)
   }, [govs, bento, setGovValues])
 

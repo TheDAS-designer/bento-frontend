@@ -30,7 +30,8 @@ const StyledNav = styled.nav`
   align-items: center;
   display: flex;
 `
-
+// ${(props) => props.theme.color.grey[500]};
+   // color: ${(props) => props.theme.color.primary.main};
 const StyledLink = styled(NavLink)`
   color: ${(props) => props.theme.color.grey[400]};
   font-weight: 700;
@@ -38,10 +39,10 @@ const StyledLink = styled(NavLink)`
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
   &:hover {
-    color: ${(props) => props.theme.color.grey[500]};
+    color: #fcee09;
   }
   &.active {
-    color: ${(props) => props.theme.color.primary.main};
+    color: #fcee09;
   }
   @media (max-width: 400px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;

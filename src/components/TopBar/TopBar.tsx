@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Container from '../Container'
 import Logo from '../Logo'
+import Spacer from '../Spacer'
 
 import AccountButton from './components/AccountButton'
 import I18nButton from './components/I18nButton'
@@ -23,10 +24,9 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
           <Nav />
           <StyledAccountButtonWrapper>
             <AccountButton />
-          </StyledAccountButtonWrapper>
-          <StyledI18nButtonWrapper>
+            <Spacer size="lg"/>
             <I18nButton />
-          </StyledI18nButtonWrapper>
+          </StyledAccountButtonWrapper>
         </StyledTopBarInner>
       </Container>
     </StyledTopBar>
@@ -40,7 +40,7 @@ const StyledI18nButtonWrapper = styled.div`
   width: 156px;
   @media (max-width: 400px) {
     justify-content: center;
-    width: auto;
+    width: 20px;
   }
 `
 
@@ -74,7 +74,7 @@ const StyledAccountButtonWrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: flex-end;
-  width: 156px;
+  width: 556px;
   @media (max-width: 400px) {
     justify-content: center;
     width: auto;

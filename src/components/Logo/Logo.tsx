@@ -7,9 +7,9 @@ import womenChef from '../../assets/img/womenChef.png'
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <img src={womenChef} height="32" style={{ marginTop: -4 }} />
+      
       <StyledText>
-        <MasterChefText>MasterChef's wife   </MasterChefText>🍱
+        <MasterChefText>Cyber🦾Union</MasterChefText> 
       </StyledText>
     </StyledLogo>
   )
@@ -27,7 +27,7 @@ const StyledLogo = styled(Link)`
 `
 
 const StyledText = styled.span`
-  color: ${(props) => props.theme.color.grey[600]};
+  color: #f7f4f2;
   font-family: 'Reem Kufi', sans-serif;
   font-size: 20px;
   font-weight: 700;
@@ -39,7 +39,7 @@ const StyledText = styled.span`
 `
 
 const MasterChefText = styled.span`
-  font-family: 'Kaushan Script', sans-serif;
-`
+font-family: Tomorrow, sans-serif;
 
+`
 export default Logo

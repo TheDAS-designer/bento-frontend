@@ -71,7 +71,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
           <Button 
             disabled={pendingTx}
             text={t.approval} 
-            variant="secondary" 
+            variant="secondary"  
             onClick={() => {
               setPendingTx(true)
               onApprove(val).then((result) => {
