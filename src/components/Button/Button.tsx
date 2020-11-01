@@ -176,7 +176,8 @@ interface StyledButtonProps {
 const StyledButtonMini = styled.button<StyledButtonProps>`
 align-items: center;
 border: 0;
-
+padding: 0;
+font-size: 25px;
 cursor: pointer;
 display: flex;
 height: ${props => props.size}px;

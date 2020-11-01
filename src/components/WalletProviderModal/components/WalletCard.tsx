@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../../Button'
+import {default as Button, CyberButton}  from '../../Button'
 import Card from '../../Card'
 import CardContent from '../../CardContent'
 import CardIcon from '../../CardIcon'
@@ -21,7 +21,7 @@ const WalletCard: React.FC<WalletCardProps> = ({ icon, onConnect, title }) =>{
       <CardIcon>{icon}</CardIcon>
       <CardTitle text={title} />
       <Spacer />
-      <Button onClick={onConnect} text={t.walletConnect} />
+      <CyberButton onClick={onConnect} buttonWidth={185} text={t.walletConnect} />
     </CardContent>
   </Card>
 )}

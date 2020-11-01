@@ -92,7 +92,8 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
       max={tokenBalance}
       onConfirm={onVote}
       onApprove={onApprove}
-      tokenName={auction.auctionName}
+      //tokenName={auction.auctionName}
+      tokenName='$UIN'
     />,
   )
   const forVotes = auction.auctionForVotes
@@ -409,8 +410,8 @@ const StyledBar = styled.div<{
   width: 350px;
   height: ${({ height }) => height};
   position: relative;
-  border-left: 350px solid #FF8484;
-  border-bottom: 0px solid #FF8484;
+  border-left: 350px solid #e6dcd5;
+  border-bottom: 0px solid #e6dcd5;
 
   bottom: 0;
   animation: up3 1s ease-in;
