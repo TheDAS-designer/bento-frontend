@@ -45,7 +45,7 @@ const Home: React.FC = () => {
             >
               <Button
                 onClick={onPresentWalletProviderModal}
-                text="🔓 Unlock Wallet"
+                text={"🔓 " + t.unlockWallet}
               />
             </div>
           )}

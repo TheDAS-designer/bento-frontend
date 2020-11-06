@@ -126,13 +126,12 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
       
           <RowFixed gap="0px">
             <StyledContent>
-              <StyledMiniButton
-                size='sm'
+              <StyledButton
                 disabled={!poolActive}
                 onClick={handleExpand}
               >
-                {arrow}
-              </StyledMiniButton>
+                  {arrow}
+              </StyledButton>
             </StyledContent>
           </RowFixed>
         </FixedHeightRow>
@@ -142,7 +141,7 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
         <AutoColumn justify='flex-start'>
           <RowFixed gap="0px">
             <StyledText>
-              {auction.auctionName}：{auction.proposalDescription}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{auction.auctionName}：{auction.proposalDescription}
             </StyledText>
           </RowFixed>
         </AutoColumn>
@@ -391,6 +390,25 @@ const StyledTitle = styled.h4`
   padding: 0;
 `
 
+const buttonStyle = styled.div`
+  align-items: center;
+  border: 0;
+
+  cursor: pointer;
+  display: flex;
+  height: 10px;
+  width: 5px;
+  justify-content: center;
+  padding-right: 10px;
+  &:hover {
+    background-color: ${props => props.theme.color.grey[100]};
+  }
+`
+export const StyledButton = styled(buttonStyle) <{ disabled?: boolean }>`
+
+`
+
+
 const StyledContent = styled.div`
   align-items: center;
   display: flex;
@@ -409,8 +427,11 @@ const StyledBar = styled.div<{
   width: 350px;
   height: ${({ height }) => height};
   position: relative;
-  border-left: 350px solid #FF8484;
-  border-bottom: 0px solid #FF8484;
+  border-left: 2px solid #FF8484;
+  border-bottom: 1px solid #FF8484;
+  border: lightGray 1px solid;
+  background-color: lightBlue;
+  text-align: center;
 
   bottom: 0;
   animation: up3 1s ease-in;
@@ -475,6 +496,7 @@ const StyledText = styled.div`
   justify-content: center;
   color: #aa9584;
   width: 100%;
+  padding-left: 5px;
   // margin-top: 12px;
   // line-height: 64px;
   font-size: 16px;
