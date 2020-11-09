@@ -116,7 +116,7 @@ const Balances: React.FC = () => {
           <Footnote>
             {t.pending}
             <FootnoteValue>
-              <PendingRewards /> BENTO
+              <PendingRewards /> UIN
           </FootnoteValue>
           </Footnote>
         </Card>
@@ -138,7 +138,7 @@ const Balances: React.FC = () => {
           </CardContent>
           <Footnote>
             {t.newRewards}
-            <FootnoteValue>64 BENTO</FootnoteValue>
+            <FootnoteValue>64 UIN</FootnoteValue>
           </Footnote>
         </Card>
       </StyledWrapper>
@@ -294,7 +294,7 @@ const Vote: React.FC<Vote> = ({ vote }) => {
         </StyledAuctionEntryName>
         <Spacer></Spacer>
         <StyledAuctionEntryContent>
-          <Label text="$BENTO"></Label>
+          <Label text="UIN"></Label>
         </StyledAuctionEntryContent>
         <Spacer size="sm"></Spacer>
         <StyledAuctionEntryContent>
@@ -431,8 +431,8 @@ const StyledTitle = styled.h1`
 const Footnote = styled.div`
   font-size: 14px;
   padding: 8px 20px;
-  color: ${(props) => props.theme.color.grey[400]};
-  border-top: solid 1px ${(props) => props.theme.color.grey[300]};
+  color: ${(props) => props.theme.color.grey[900]};
+  border-top: solid 1px ${(props) => props.theme.color.grey[400]};
 `
 const FootnoteValue = styled.div`
   font-family: 'Roboto Mono', monospace;

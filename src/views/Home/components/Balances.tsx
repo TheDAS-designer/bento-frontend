@@ -212,7 +212,7 @@ const Balances: React.FC = () => {
             <StyledBalances>
               <div style={{ flex: 1 }}>
                 <StyledTitle>
-                  <Label text={`🔥${t.burnedToken} $BENTO`} />
+                  <Label text={`🔥${t.burnedToken} $UIN`} />
                 </StyledTitle>
                 <StyledTitle>
                   <CountUp
@@ -236,7 +236,7 @@ const Balances: React.FC = () => {
                 </StyledAuctionEntryName>
                 <Spacer></Spacer>
                 <StyledAuctionEntryContent>
-                  <Label text="$BENTO"></Label>
+                  <Label text="$UIN"></Label>
                 </StyledAuctionEntryContent>
                 <Spacer size="sm"></Spacer>
                 <StyledAuctionEntryContent>
@@ -250,7 +250,7 @@ const Balances: React.FC = () => {
                 </StyledAuctionEntryName>
                 <Spacer></Spacer>
                 <StyledAuctionEntryContent>
-                  <Label text="$BENTO"></Label>
+                  <Label text="$UIN"></Label>
                 </StyledAuctionEntryContent>
                 <Spacer size="sm"></Spacer>
                 <StyledAuctionEntryContent>
@@ -264,7 +264,7 @@ const Balances: React.FC = () => {
                 </StyledAuctionEntryName>
                 <Spacer></Spacer>
                 <StyledAuctionEntryContent>
-                  <Label text="$BENTO"></Label>
+                  <Label text="$UIN"></Label>
                 </StyledAuctionEntryContent>
                 <Spacer size="sm"></Spacer>
                 <StyledAuctionEntryContent>

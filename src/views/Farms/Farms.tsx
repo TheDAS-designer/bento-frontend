@@ -46,9 +46,12 @@ const Farms: React.FC = () => {
               justifyContent: 'center',
             }}
           >
-          <Button
+           <CyberButton
+            buttonWidth={250}
+            buttonHeight={100}
             onClick={onPresentWalletProviderModal}
-            text="🔓 Unlock Wallet"
+            buttonFontSize={30}
+            text={`${t.unlockWallet}`}
           />
           </div>
         )}

@@ -12,7 +12,8 @@ const Card = styled(Box)<{ padding?: string; border?: string; borderRadius?: str
   border-radius: ${({ borderRadius }) => borderRadius};
 `
 export default Card
-
+//rgb(86 85 83)
+//border: 1px solid ${({ theme }) => theme.bg2};
 export const LightCard = styled(Card)`
   border: 1px solid ${({ theme }) => theme.bg2};
   background-color: ${({ theme }) => theme.bg1};

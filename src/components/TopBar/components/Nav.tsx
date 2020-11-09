@@ -39,10 +39,10 @@ const StyledLink = styled(NavLink)`
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
   &:hover {
-    color: #fcee09;
+    color: ${(props) => props.theme.color.grey[300]};
   }
   &.active {
-    color: #fcee09;
+    color: ${(props) => props.theme.color.grey[300]};
   }
   @media (max-width: 400px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;

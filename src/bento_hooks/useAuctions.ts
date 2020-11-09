@@ -102,7 +102,7 @@ const useAuctions = () => {
   }, [account, bento, setAuctions])
 
   useEffect(() => {
-    if (bento) {
+    if (bento && account) {
       console.log('fdasfdsafdsafdsafdsafdsa')
       fetchAuctions()
     }

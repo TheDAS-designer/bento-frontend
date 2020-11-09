@@ -43,10 +43,10 @@ const StyledResponsiveWrapper = styled.div`
 
 const StyledModal = styled.div`
   padding: 0 20px;
-  background: ${(props) => props.theme.color.grey[100]};
-  border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
+  background: ${(props) => props.theme.color.grey[200]};
+  border: 1px solid ${(props) => props.theme.color.grey[900]};
   border-radius: 0px;
-  box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
+  box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[700]};
   display: flex;
   flex-direction: column;
   position: relative;

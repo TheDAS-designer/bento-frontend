@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components'
 import WalletProviderModal from '../../components/WalletProviderModal'
 import womenChef from '../../assets/img/womenChef.png'
-import Button from '../../components/Button'
+import {CyberButton} from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
@@ -43,10 +43,13 @@ const Home: React.FC = () => {
                 justifyContent: 'center',
               }}
             >
-              <Button
-                onClick={onPresentWalletProviderModal}
-                text="🔓 Unlock Wallet"
-              />
+              <CyberButton
+            buttonWidth={250}
+            buttonHeight={100}
+            onClick={onPresentWalletProviderModal}
+            buttonFontSize={30}
+            text={`${t.unlockWallet}`}
+          />
             </div>
           )}
       </Page>

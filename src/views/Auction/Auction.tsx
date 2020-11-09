@@ -49,7 +49,7 @@ const Auction: React.FC = () => {
             buttonHeight={100}
             onClick={onPresentWalletProviderModal}
             buttonFontSize={30}
-            text={`🦿 ${t.unlockWallet}`}
+            text={`${t.unlockWallet}`}
           />
           </div>
           </div>

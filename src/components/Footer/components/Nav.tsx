@@ -8,18 +8,18 @@ const Nav: React.FC = () => {
         target="_blank"
         href="https://etherscan.io/address/0xc2edad668740f1aa35e4d8f227fb8e17dca888cd#code"
       >
-        BentoMiner Contract
+        CyberUion Contract
       </StyledLink>
       <StyledLink
         target="_blank"
         href="https://uniswap.info/pair/0xce84867c3c02b05dc570d0135103d3fb9cc19433"
       >
-        Uniswap BENTO-ETH
+        Uniswap UIN-ETH
       </StyledLink>
       <StyledLink target="_blank" href="https://discord.gg/REjDWW">
         Discord
       </StyledLink>
-      <StyledLink target="_blank" href="https://github.com/sushiswap">
+      <StyledLink target="_blank" href="https://github.com/Reset_DAO">
         Github
       </StyledLink>
       <StyledLink target="_blank" href="https://twitter.com/dao_reset">
