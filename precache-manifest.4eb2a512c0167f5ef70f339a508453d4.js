@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c5641d18aad3b6563a98fba0b391da39",
+    "revision": "b098dd33e87907f63cad06b971dadbc3",
     "url": "/bento-frontend/index.html"
   },
   {
-    "revision": "49b8f7582869c0dd9b23",
-    "url": "/bento-frontend/static/css/main.3538621c.chunk.css"
+    "revision": "ec0f67f939c6f9daaf24",
+    "url": "/bento-frontend/static/css/main.85bde48a.chunk.css"
   },
   {
     "revision": "23253e85df160df7191e",
@@ -68,8 +68,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bento-frontend/static/js/9.adcc9850.chunk.js"
   },
   {
-    "revision": "49b8f7582869c0dd9b23",
-    "url": "/bento-frontend/static/js/main.8ef01159.chunk.js"
+    "revision": "ec0f67f939c6f9daaf24",
+    "url": "/bento-frontend/static/js/main.e55ef254.chunk.js"
   },
   {
     "revision": "6f16790b117c64a8e7e2",

@@ -2,9 +2,9 @@
   "files": {
     "static/js/0.447eb639.chunk.js": "/bento-frontend/static/js/0.447eb639.chunk.js",
     "static/js/0.447eb639.chunk.js.map": "/bento-frontend/static/js/0.447eb639.chunk.js.map",
-    "main.css": "/bento-frontend/static/css/main.3538621c.chunk.css",
-    "main.js": "/bento-frontend/static/js/main.8ef01159.chunk.js",
-    "main.js.map": "/bento-frontend/static/js/main.8ef01159.chunk.js.map",
+    "main.css": "/bento-frontend/static/css/main.85bde48a.chunk.css",
+    "main.js": "/bento-frontend/static/js/main.e55ef254.chunk.js",
+    "main.js.map": "/bento-frontend/static/js/main.e55ef254.chunk.js.map",
     "runtime-main.js": "/bento-frontend/static/js/runtime-main.276b9ada.js",
     "runtime-main.js.map": "/bento-frontend/static/js/runtime-main.276b9ada.js.map",
     "static/js/3.57602d0c.chunk.js": "/bento-frontend/static/js/3.57602d0c.chunk.js",
@@ -26,9 +26,9 @@
     "static/js/11.bbff6243.chunk.js": "/bento-frontend/static/js/11.bbff6243.chunk.js",
     "static/js/11.bbff6243.chunk.js.map": "/bento-frontend/static/js/11.bbff6243.chunk.js.map",
     "index.html": "/bento-frontend/index.html",
-    "precache-manifest.47dd9a88d5fdeb304ca4b9a944fe4ffd.js": "/bento-frontend/precache-manifest.47dd9a88d5fdeb304ca4b9a944fe4ffd.js",
+    "precache-manifest.4eb2a512c0167f5ef70f339a508453d4.js": "/bento-frontend/precache-manifest.4eb2a512c0167f5ef70f339a508453d4.js",
     "service-worker.js": "/bento-frontend/service-worker.js",
-    "static/css/main.3538621c.chunk.css.map": "/bento-frontend/static/css/main.3538621c.chunk.css.map",
+    "static/css/main.85bde48a.chunk.css.map": "/bento-frontend/static/css/main.85bde48a.chunk.css.map",
     "static/js/3.57602d0c.chunk.js.LICENSE.txt": "/bento-frontend/static/js/3.57602d0c.chunk.js.LICENSE.txt",
     "static/js/5.c5cdfb54.chunk.js.LICENSE.txt": "/bento-frontend/static/js/5.c5cdfb54.chunk.js.LICENSE.txt",
     "static/js/6.a5fa8923.chunk.js.LICENSE.txt": "/bento-frontend/static/js/6.a5fa8923.chunk.js.LICENSE.txt",
@@ -42,7 +42,7 @@
   "entrypoints": [
     "static/js/runtime-main.276b9ada.js",
     "static/js/3.57602d0c.chunk.js",
-    "static/css/main.3538621c.chunk.css",
-    "static/js/main.8ef01159.chunk.js"
+    "static/css/main.85bde48a.chunk.css",
+    "static/js/main.e55ef254.chunk.js"
   ]
 }
