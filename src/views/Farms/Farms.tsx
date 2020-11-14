@@ -52,6 +52,7 @@ const Farms: React.FC = () => {
             onClick={onPresentWalletProviderModal}
             buttonFontSize={30}
             text={`${t.unlockWallet}`}
+
           />
           </div>
         )}
