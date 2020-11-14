@@ -109,14 +109,14 @@ const Balances: React.FC = () => {
                 />
               </div>
               <ButtonStyle>
-                <CyberButton text={`${t.mining}`} to="/farms" variant="default" size="md" />
+                <CyberButton text={`${t.mining}`} to="/farms" buttonWidth={75} buttonHeight={45} variant="default" size="md" />
               </ButtonStyle>
             </StyledBalances>
           </CardContent>
           <Footnote>
             {t.pending}
             <FootnoteValue>
-              <PendingRewards /> BENTO
+              <PendingRewards /> UIN
           </FootnoteValue>
           </Footnote>
         </Card>
@@ -132,13 +132,13 @@ const Balances: React.FC = () => {
                 />
               </div>
               <ButtonStyle>
-                <CyberButton text={`${t.buy}`} href="https://app.uniswap.org/#/swap" variant="default" size="md" />
+                <CyberButton text={`${t.buy}`} href="https://app.uniswap.org/#/swap" variant="default" size="md" buttonWidth={75} buttonHeight={45}/>
               </ButtonStyle>
             </StyledBalances>
           </CardContent>
           <Footnote>
             {t.newRewards}
-            <FootnoteValue>64 BENTO</FootnoteValue>
+            <FootnoteValue>64 UIN</FootnoteValue>
           </Footnote>
         </Card>
       </StyledWrapper>
@@ -208,7 +208,7 @@ const Balances: React.FC = () => {
             </StyledPools>
           </CardContent>
           <Footnote>
-            <CyberButton text={`${t.stake}`} href="https://app.uniswap.org/#/swap" variant="default" size="md" />
+            <CyberButton text={`${t.stake}`} href="https://app.uniswap.org/#/swap" buttonWidth={300} buttonHeight={45} variant="default" size="md" />
 
           </Footnote>
         </Card>
@@ -219,8 +219,8 @@ const Balances: React.FC = () => {
             <StyledBalances>
               <div style={{ flex: 1 }}>
                 <StyledTitle>
-                  <Label text={`🔥${t.burnedToken} $BENTO`} />
-                  <Value value={t.locked} />
+                  <Label text={`🔥${t.burnedToken} $UIN`} />
+                  <Value value='142583' />
                 </StyledTitle>
 
               </div>
@@ -260,7 +260,7 @@ const Balances: React.FC = () => {
 
             <StyleLink exact to="/auction">
               <div style={{width: '100%'}}>
-              <CyberButton text={`${t.auction_bid}`} variant="default" />
+              <CyberButton text={`${t.auction_bid}`} buttonWidth={300} buttonHeight={45} variant="default" />
               </div>
             </StyleLink>
           </Footnote>
@@ -294,7 +294,7 @@ const Vote: React.FC<Vote> = ({ vote }) => {
         </StyledAuctionEntryName>
         <Spacer></Spacer>
         <StyledAuctionEntryContent>
-          <Label text="$BENTO"></Label>
+          <Label text="UIN"></Label>
         </StyledAuctionEntryContent>
         <Spacer size="sm"></Spacer>
         <StyledAuctionEntryContent>
@@ -431,8 +431,8 @@ const StyledTitle = styled.h1`
 const Footnote = styled.div`
   font-size: 14px;
   padding: 8px 20px;
-  color: ${(props) => props.theme.color.grey[400]};
-  border-top: solid 1px ${(props) => props.theme.color.grey[300]};
+  color: ${(props) => props.theme.color.grey[900]};
+  border-top: solid 1px ${(props) => props.theme.color.grey[400]};
 `
 const FootnoteValue = styled.div`
   font-family: 'Roboto Mono', monospace;

@@ -56,6 +56,7 @@ const i18n = {
         walletConnect: "Connect",
 
         auction_bid: "Bid",
+        auction_loading: "Power is gathering ...",
     },
     'zh-CN': {
         welcome: '你好',
@@ -114,6 +115,7 @@ const i18n = {
         walletConnect: "连接钱包",
 
         auction_bid: "竞拍",
+        auction_loading: "权力正在汇聚 ...",
 
     },
 };

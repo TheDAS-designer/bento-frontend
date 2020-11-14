@@ -5,7 +5,7 @@ import { useWallet } from 'use-wallet'
 import metamaskLogo from '../../assets/img/metamask-fox.svg'
 import walletConnectLogo from '../../assets/img/wallet-connect.svg'
 
-import Button from '../Button'
+import {default as Button, CyberButton} from '../Button'
 import Modal, { ModalProps } from '../Modal'
 import ModalActions from '../ModalActions'
 import ModalContent from '../ModalContent'
@@ -50,7 +50,7 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
       </ModalContent>
 
       <ModalActions>
-        <Button text={t.walletCancle} variant="secondary" onClick={onDismiss} />
+        <CyberButton text={t.walletCancle} buttonWidth={450}  buttonHeight={55} variant="secondary" onClick={onDismiss} />
       </ModalActions>
     </Modal>
   )

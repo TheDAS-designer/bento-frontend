@@ -15,6 +15,7 @@ interface ButtonProps {
   clipPath?: string,
   buttonWidth?: number,
   buttonHeight?: number,
+  buttonFontSize?: number,
 
 }
 
@@ -30,6 +31,7 @@ export const CyberButton: React.FC<ButtonProps> = ({
   clipPath,
   buttonWidth,
   buttonHeight,
+  buttonFontSize,
 }) => {
   const { color, spacing } = useContext(ThemeContext)
 
@@ -127,7 +129,8 @@ export const CyberButton: React.FC<ButtonProps> = ({
       // : ${clipPath}`: 'polygon(92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%, 0 0)'
       <button className="btn"
       style={{ width: buttonWidth? `${buttonWidth}px`: '50px', 
-      height:buttonHeight ?`${buttonHeight}px` : '37px'}}
+      height:buttonHeight ?`${buttonHeight}px` : '37px',
+    fontSize: buttonFontSize? buttonFontSize: fontSize}}
       onClick={onClick}>
           {children}
           {ButtonChild}

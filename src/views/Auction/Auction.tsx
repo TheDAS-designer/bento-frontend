@@ -4,7 +4,7 @@ import { useWallet } from 'use-wallet'
 
 import chef from '../../assets/img/womenChef.png'
 
-import Button from '../../components/Button'
+import {default as Button, CyberButton} from '../../components/Button'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'
@@ -43,10 +43,15 @@ const Auction: React.FC = () => {
               justifyContent: 'center',
             }}
           >
-          <Button
+          <div style={{padding: '5px'}}>
+          <CyberButton
+            buttonWidth={250}
+            buttonHeight={100}
             onClick={onPresentWalletProviderModal}
-            text={"🔓 " + t.unlockWallet}
+            buttonFontSize={30}
+            text={`${t.unlockWallet}`}
           />
+          </div>
           </div>
         )}
       </Page>

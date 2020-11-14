@@ -264,7 +264,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                         size='lg'
                         buttonWidth={220}
                         disabled={pendingTx}
-                        text={t.unclaimed + 'BENTO\n' + getBalanceNumber(pendingRewrds)} 
+                        text={t.unclaimed + '$UIN\n' + getBalanceNumber(pendingRewrds)} 
                         onClick={async () => {
                           setPendingTx(true)
                           await onClaimMinedToken(farm.id)

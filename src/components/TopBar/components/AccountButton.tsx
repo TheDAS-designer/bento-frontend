@@ -27,9 +27,9 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
   return (
     <StyledAccountButton>
       {!account ? (
-        <CyberButton onClick={handleUnlockClick} size="lg" buttonWidth={100} text={t.unlockWallet} />
+        <CyberButton onClick={handleUnlockClick} size="lg" buttonWidth={100} buttonFontSize={12} text={t.unlockWallet} />
       ) : (
-        <CyberButton onClick={onPresentAccountModal} size="lg" buttonWidth={100} text={t.myWallet} />
+        <CyberButton onClick={onPresentAccountModal} size="lg" buttonWidth={100} buttonFontSize={12} text={t.myWallet} />
       )}
     </StyledAccountButton>
   )

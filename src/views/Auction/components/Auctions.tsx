@@ -92,7 +92,8 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
       max={tokenBalance}
       onConfirm={onVote}
       onApprove={onApprove}
-      tokenName={auction.auctionName}
+      //tokenName={auction.auctionName}
+      tokenName='$UIN'
     />,
   )
   const forVotes = auction.auctionForVotes
@@ -115,7 +116,7 @@ const AuctionDetails: React.FC<AuctionDetailsContent> = ({ auction }: AuctionDet
             </StyledLink>
           </RowFixed>
           <RowFixed gap="2px">
-            <StyledText>{getBalanceNumber(auction.totalBentoInVote)} BENTO </StyledText>
+            <StyledText>{getBalanceNumber(auction.totalBentoInVote)} UIN </StyledText>
           </RowFixed>
           <RowFixed gap="2px">
             <StyledText>{getBalanceNumber(auction.totalVotes) < 1 ? 0 : getBalanceNumber(auction.totalVotes)} COMP </StyledText>
@@ -228,7 +229,7 @@ const Box = styled.div({})
 
 const StyledPositionCard = styled.div`
   width: 900px;
-  border: 2px solid #00f0ff;
+  border: 2px solid rgb(86 85 83);
   position: relative;
 `
 
@@ -424,14 +425,12 @@ const StyledBox = styled.div`
 const StyledBar = styled.div<{
   height?: '0%' | string
 }>`
-  width: 350px;
+  width: 100%;
   height: ${({ height }) => height};
   position: relative;
-  border-left: 2px solid #FF8484;
-  border-bottom: 1px solid #FF8484;
-  border: lightGray 1px solid;
-  background-color: lightBlue;
-  text-align: center;
+  border-left: 350px solid rgb(220 103 22);
+  border-bottom: 0px solid rgb(220 103 22);
+
 
   bottom: 0;
   animation: up3 1s ease-in;
