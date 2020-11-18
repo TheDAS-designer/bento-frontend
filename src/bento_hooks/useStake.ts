@@ -13,7 +13,7 @@ const useStake = (farm: Farm) => {
 
   const handleStake = useCallback(
     async (amount: string) => {
-
+      console.log('handleStake amount', amount)
       return await stake(
         getBentoMinerContract(bento),
         amount,

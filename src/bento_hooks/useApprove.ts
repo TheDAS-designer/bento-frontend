@@ -18,6 +18,8 @@ const useApprove = (farm) => {
   // const tokenContract = getBentoContract(bento)
 
   const handleApprove = useCallback(async (amount: string) => {
+    console.log('approve amount:', amount)
+    console.log('farm.tokenContract,farm.govAddress:',farm.tokenContract,farm.govAddress)
       return await approveGovToken(farm.tokenContract,farm.govAddress, account, amount).then((result) => {
         console.log('result in useAppve', result)
         return (result)

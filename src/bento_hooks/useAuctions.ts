@@ -51,17 +51,18 @@ const useAuctions = () => {
           const totalVotes = await totalGovTokensLocked(govContract)
          //mydebug
           let proposals = await getProposalsEvent(originalGovContract, name, _block)
-          proposals = proposals.filter( p => {
-            let flag = false
-            for(let i in votes){
-              if(votes[i].Proposalid === p.id){
-                  flag = true
-                  break
-              }
-            }
-            return flag
-          })
-
+          //Filter out events that do not meet UON
+          // proposals = proposals.filter( p => {
+          //   let flag = false
+          //   for(let i in votes){
+          //     if(votes[i].Proposalid === p.id){
+          //         flag = true
+          //         break
+          //     }
+          //   }
+          //   return flag
+          // })
+          console.log('my compound proposals:', proposals)
           
           const _auctions = Promise.all(proposals.map( async(p, i) => {
             let auction

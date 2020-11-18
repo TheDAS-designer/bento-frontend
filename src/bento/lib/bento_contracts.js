@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
-import BentoMinerAbi from './abi/ABI_BentoMiner.json'
+import BentoMinerAbi from './abi/ABI_UINMiner.json'
 import GovernorAlphaAbi from './abi/ABI_Comp_Gov.json'
-import BentoAbi from './abi/ABI_Bentoken.json'
+import BentoAbi from './abi/ABI_UINToken.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth_kovan.json'
 import {

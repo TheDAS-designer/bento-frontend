@@ -148,11 +148,11 @@ export const supportedPools = [
     },
     tokenAddresses: {
       1: '',
-      42: '0x61460874a7196d6a22D1eE4922473664b3E95270'
+      42: '0x0AA2bD81e77aecfD9B3FA17035FeCaF0b61CA89A'
     },
     originalGovAddress: {
       1: '',
-      42: '0x665a5f09716d63D9256934855b0CE2056a5C4Cf8'
+      42: '0x3D6dA2F3EdD4dEE80E35E0369a42334B6f08D454'
     },
     govAddresses: {
       1:'',

@@ -171,6 +171,7 @@ export const getBentoSupply = async (bento) => {
 }
 
 export const stake = async (bentoMinerContract, amount, account) => {
+  console.log('stake amount', bentoMinerContract)
   return bentoMinerContract.methods
     .deposit(
       new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
@@ -184,7 +185,7 @@ export const stake = async (bentoMinerContract, amount, account) => {
 
 export const unstake = async (bentoMinerContract, amount, account) => {
   return bentoMinerContract.methods
-    .claimAllBentoAndWithdrawGovs(
+    .claimAllUINAndWithdrawGovs(
       new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
     )
     .send({ from: account })
@@ -511,8 +512,8 @@ const validateBigNumbers = (...arr) => {
   return flag
 }
 
-export const getBentoProduction = async (bentoMiner, govContract) => {
-  let bp = await bentoMiner.methods.bentoProduction(govContract.options.address).call()
+export const getBentoProduction = async (uinTokenContract, govContract) => {
+  let bp = await uinTokenContract.methods.uinProduction(govContract.options.address).call()
   if (bp) {
     return new BigNumber(bp)
   } else {
